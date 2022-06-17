@@ -107,4 +107,29 @@ public class Arvore {
 		}
 		return retornar;
 	}
+
+	public void percorrer(No no, Scanner ent, boolean teste) {
+		System.out.println(no.getPergunta());
+		teste = converter(ent.next());
+		if(no.noFolha() == true) {
+			if(teste) {
+				System.out.println("Vencemos!");
+				return;
+			}
+			System.out.println("Desculpe, não pudemos encontrar o personagem");
+			return;
+		}
+		if (teste && !no.noFolha())
+			percorrer(no.getDireito(), ent, teste);
+		else
+			percorrer(no.getEsquerdo(), ent, teste);
+	}
+
+	private boolean converter(String valor) {
+		valor = valor.toLowerCase();
+		if(valor.equals("sim") || valor.equals("true") || valor.equals("1") || valor.equals("s"))
+			return true;
+		else
+			return false;
+	}
 }
